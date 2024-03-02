@@ -1,0 +1,108 @@
+@use "./abstracts" as abs;
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+img,
+svg {
+	max-width: 100%;
+	display: block;
+}
+
+body {
+	font-family: abs.$ff-poppins;
+	font-size: abs.toRem(16px);
+}
+
+main {
+	padding: abs.toRem(50px);
+}
+
+header {
+	padding: abs.toRem(20px);
+	box-shadow: 0 abs.toRem(10px) abs.toRem(20px) rgba(0, 0, 0, 0.2);
+}
+
+.form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: abs.toRem(10px);
+
+	&__input,
+	&__button {
+		font-family: inherit;
+		font-size: inherit;
+		padding: abs.toRem(10px) abs.toRem(20px);
+		border: 1px solid #000;
+		border-radius: abs.toRem(30px);
+	}
+
+	&__button {
+		cursor: pointer;
+	}
+}
+
+.results {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: abs.toRem(24px);
+	font-weight: abs.$fw-medium;
+	letter-spacing: 1.2px;
+	margin-bottom: abs.toRem(50px);
+}
+
+.users {
+	max-width: abs.toRem(1300px);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(abs.toRem(200px), 1fr));
+	gap: abs.toRem(30px);
+	justify-items: center;
+}
+
+.user {
+	cursor: pointer;
+	box-shadow: 0 abs.toRem(5px) abs.toRem(10px) rgba(0, 0, 0, 0.2);
+	border-radius: abs.toRem(10px);
+	overflow: hidden;
+	transition: all 0.2s;
+
+	&:hover {
+		transform: scale(1.1);
+		box-shadow: 0 abs.toRem(10px) abs.toRem(5px) rgba(0, 0, 0, 0.2);
+	}
+
+	&__avatar-container {
+		position: relative;
+	}
+
+	&__avatar-background {
+		filter: blur(abs.toRem(4px));
+	}
+
+	&__avatar {
+		width: abs.toRem(120px);
+		height: abs.toRem(120px);
+		border-radius: 50%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	&__info {
+		padding: abs.toRem(20px);
+		text-align: center;
+	}
+
+	&__name {
+		font-weight: abs.$fw-medium;
+	}
+}
