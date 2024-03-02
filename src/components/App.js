@@ -34,8 +34,6 @@ export default function App() {
 
 			const data = await res.json();
 
-			console.log(data);
-
 			if (!data.total_count) {
 				throw new Error("No users found");
 			}
