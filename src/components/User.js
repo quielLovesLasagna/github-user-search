@@ -14,7 +14,11 @@ export default function User({ user }) {
 				/>
 			</div>
 			<div className="user__info">
-				<p className="user__name">{user.login}</p>
+				<p className="user__name">
+					<a href={user.html_url} target="_blank" rel="noreferrer">
+						{user.login}
+					</a>
+				</p>
 			</div>
 		</div>
 	);

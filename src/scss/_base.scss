@@ -104,5 +104,21 @@ header {
 
 	&__name {
 		font-weight: abs.$fw-medium;
+
+		& a:link,
+		& a:visited {
+			text-decoration: none;
+			color: #000;
+		}
+
+		& a:hover,
+		& a:active {
+			text-decoration: underline;
+		}
 	}
+}
+
+.loader,
+.error {
+	text-align: center;
 }
