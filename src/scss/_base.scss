@@ -102,18 +102,56 @@ header {
 		text-align: center;
 	}
 
-	&__name {
+	&__name,
+	&__tag {
 		font-weight: abs.$fw-medium;
+	}
 
-		& a:link,
-		& a:visited {
-			text-decoration: none;
-			color: #000;
+	&__details {
+		max-width: abs.toRem(400px);
+		height: fit-content;
+		box-shadow: 0 abs.toRem(5px) abs.toRem(10px) rgba(0, 0, 0, 0.2);
+		border-radius: abs.toRem(10px);
+		margin: 0 auto;
+		overflow: hidden;
+		padding: abs.toRem(20px);
+
+		& p {
+			word-wrap: break-word;
 		}
 
-		& a:hover,
-		& a:active {
-			text-decoration: underline;
+		& .user__avatar {
+			position: static;
+			transform: none;
+			margin: 0 auto;
+			margin-bottom: abs.toRem(20px);
+		}
+
+		& .user__info {
+			text-align: left;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			gap: abs.toRem(5px);
+		}
+
+		& .user__name {
+			font-weight: abs.$fw-tiny;
+		}
+
+		& .close-btn {
+			cursor: pointer;
+			border: 1px solid #ff0000;
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: abs.$fw-large;
+			background: none;
+			color: #ff0000;
+			width: abs.toRem(24px);
+			height: abs.toRem(24px);
+			border-radius: 50%;
+			display: block;
+			margin-left: auto;
 		}
 	}
 }

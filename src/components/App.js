@@ -3,6 +3,7 @@ import Form from "./Form";
 import Users from "./Users";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
+import UserDetails from "./UserDetails";
 
 const API = "https://api.github.com/search/users?q=";
 
@@ -12,17 +13,36 @@ export default function App() {
 	const [results, setResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
+	const [selectedId, setSelectedId] = useState(null);
+	const [selectedUser, setSelectedUser] = useState(null);
+
+	function handleSelectUser(id) {
+		setSelectedId(id);
+
+		// ! -- Get selected user
+		const user = results.find((user) => user.id === id);
+
+		setSelectedUser(user);
+	}
+
+	function handleCloseDetails() {
+		setSelectedId(null);
+		setSelectedUser(null);
+	}
 
 	async function searchUser(query) {
 		try {
-			setIsLoading(true);
-			setError("");
+			// ! -- If there is no query, exit
+			if (!query) return;
 
 			// ! -- If current query is the same as prevQuery, exit
 			if (query === prevQuery) {
 				setIsLoading(false);
 				return;
 			}
+
+			setIsLoading(true);
+			setError("");
 
 			const res = await fetch(`${API}${query}`);
 
@@ -57,10 +77,21 @@ export default function App() {
 				<Form query={query} setQuery={setQuery} onSearchUser={searchUser} />
 			</header>
 			<main className="main">
-				<p className="results">Results</p>
+				{selectedUser ? (
+					<UserDetails
+						user={selectedUser}
+						onCloseDetails={handleCloseDetails}
+					/>
+				) : (
+					<p className="results">
+						{!results.length ? "Search a user" : "Results"}
+					</p>
+				)}
 				{isLoading && <Loader />}
 				{error && <ErrorMessage message={error} />}
-				{!isLoading && !error && <Users users={results} />}
+				{!isLoading && !error && !selectedId && (
+					<Users users={results} onSelectUser={handleSelectUser} />
+				)}
 			</main>
 		</>
 	);
