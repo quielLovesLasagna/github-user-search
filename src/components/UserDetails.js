@@ -1,54 +1,9 @@
-import { useEffect, useState } from "react";
 import OtherUser from "./OtherUser";
+import { useFetchOtherUser } from "./useFetchOtherUser";
 
 export default function UserDetails({ user, onCloseDetails }) {
-	const [followers, setFollowers] = useState([]);
-	const [following, setFollowing] = useState([]);
-
-	useEffect(
-		function () {
-			async function getFollowers() {
-				try {
-					const res = await fetch(user.followers_url);
-
-					const data = await res.json();
-
-					setFollowers(data);
-				} catch (err) {
-					console.log(err);
-				}
-			}
-			getFollowers();
-
-			return function () {
-				setFollowers([]);
-			};
-		},
-
-		[user.followers_url]
-	);
-
-	useEffect(
-		function () {
-			async function getFollowing() {
-				try {
-					const res = await fetch(user.following_url);
-
-					const data = await res.json();
-
-					setFollowing(data);
-				} catch (err) {
-					console.log(err);
-				}
-			}
-			getFollowing();
-
-			return function () {
-				setFollowing([]);
-			};
-		},
-		[user.following_url]
-	);
+	const followers = useFetchOtherUser(user.follower_url);
+	const following = useFetchOtherUser(user.following_url);
 
 	return (
 		<div className="user__details">
